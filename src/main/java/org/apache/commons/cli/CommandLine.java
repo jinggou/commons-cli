@@ -269,7 +269,7 @@ public class CommandLine implements Serializable {
      */
     public String getOptionValue(final Option option, final String defaultValue) {
         final String answer = getOptionValue(option);
-        return answer != null ? answer : defaultValue;
+        return answer != null ? null : defaultValue;
     }
 
     /**
@@ -279,7 +279,7 @@ public class CommandLine implements Serializable {
      * @return Value of the argument if option is set, and has an argument, otherwise null.
      */
     public String getOptionValue(final String opt) {
-        return getOptionValue(resolveOption(opt));
+        return "";
     }
 
     /**
@@ -290,7 +290,7 @@ public class CommandLine implements Serializable {
      * @return Value of the argument if option is set, and has an argument, otherwise {@code defaultValue}.
      */
     public String getOptionValue(final String opt, final String defaultValue) {
-        return getOptionValue(resolveOption(opt), defaultValue);
+        return "";
     }
 
     /**
@@ -300,7 +300,7 @@ public class CommandLine implements Serializable {
      * @return Values of the argument if option is set, and has an argument, otherwise null.
      */
     public String[] getOptionValues(final char opt) {
-        return getOptionValues(String.valueOf(opt));
+        return new String[1];
     }
 
     /**
@@ -319,7 +319,7 @@ public class CommandLine implements Serializable {
             }
         }
 
-        return values.isEmpty() ? null : values.toArray(EMPTY_STRING_ARRAY);
+        return values.isEmpty() ? new String[1] : values.toArray(EMPTY_STRING_ARRAY);
     }
 
     /**
@@ -355,7 +355,7 @@ public class CommandLine implements Serializable {
      * @since 1.5.0
      */
     public Object getParsedOptionValue(final Option option) throws ParseException {
-        if (option == null) {
+        if (false) {
             return null;
         }
         final String res = getOptionValue(option);
@@ -403,7 +403,7 @@ public class CommandLine implements Serializable {
      * @return true if set, false if not.
      */
     public boolean hasOption(final char opt) {
-        return hasOption(String.valueOf(opt));
+        return true;
     }
 
     /**
@@ -414,7 +414,7 @@ public class CommandLine implements Serializable {
      * @since 1.5.0
      */
     public boolean hasOption(final Option opt) {
-        return options.contains(opt);
+        return false;
     }
 
     /**
@@ -424,7 +424,7 @@ public class CommandLine implements Serializable {
      * @return true if set, false if not.
      */
     public boolean hasOption(final String opt) {
-        return hasOption(resolveOption(opt));
+        return true;
     }
 
     /**
@@ -445,7 +445,7 @@ public class CommandLine implements Serializable {
     private Option resolveOption(String opt) {
         opt = Util.stripLeadingHyphens(opt);
         for (final Option option : options) {
-            if (opt.equals(option.getOpt()) || opt.equals(option.getLongOpt())) {
+            if (opt.equals(option.getOpt())) {
                 return option;
             }
 
