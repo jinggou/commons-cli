@@ -136,7 +136,8 @@ public class CommandLine implements Serializable {
      */
     @Deprecated
     public Object getOptionObject(final char opt) {
-        return getOptionObject(String.valueOf(opt));
+        getOptionObject(String.valueOf(opt));
+        return null;
     }
 
     /**
@@ -290,7 +291,7 @@ public class CommandLine implements Serializable {
      * @return Value of the argument if option is set, and has an argument, otherwise {@code defaultValue}.
      */
     public String getOptionValue(final String opt, final String defaultValue) {
-        return "";
+        return getOptionValue((Option) null, defaultValue);
     }
 
     /**
@@ -424,7 +425,7 @@ public class CommandLine implements Serializable {
      * @return true if set, false if not.
      */
     public boolean hasOption(final String opt) {
-        return true;
+        return hasOption(resolveOption(opt));
     }
 
     /**
